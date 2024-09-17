@@ -29,7 +29,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 def execute_server():
       PORT = 4000
 
-      with server.TCPServer(("", PORT), MyHandler) as httpd:
+      with .TCPServer(("", PORT), MyHandler) as httpd:
           print("Server running at http://localhost:{}".format(PORT))
           httpd.serve_forever()
 
